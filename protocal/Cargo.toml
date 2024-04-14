@@ -1,0 +1,15 @@
+[package]
+name = "protocal"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+prost = "0.12.4"
+tonic = "0.11.0"
+
+
+[build-dependencies]
+glob = "0.3.1"
+prost-build = { version = "0.12.4" }
