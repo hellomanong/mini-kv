@@ -2,6 +2,32 @@ syntax="proto3";
 
 package abi;
 
+message CommandRequest {
+    oneof request_data {
+        Hget hget = 1;
+        Hgetall hgetall = 2;
+        Hmget hmget = 3;
+        Hset hset = 4;
+        Hmset hmset = 5;
+        Hdel hdel = 6;
+        Hmdel hmdel = 7;
+        Hexist hexist = 8;
+        Hmexist hmexist = 9;
+    }
+}
+
+message CommandResponse {
+    // 状态码；复用 HTTP 2xx/4xx/5xx 状态码
+    uint32 status = 1;
+    // 如果不是 2xx， message 里包含详细的信息
+    string message = 2;
+    // 成功返回的 values
+    repeated Value values = 3;
+    // 成功返回的 kv pairs
+    repeated Kvpair pairs = 4;
+}
+
+
 message Hget {
     string table = 1;
     string key = 2;
@@ -56,7 +82,7 @@ message Hexist {
     string key = 2;
 }
 
-message  Hmexit {
+message  Hmexist {
     string table = 1;
     repeated string keys = 2;
 }
